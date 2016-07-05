@@ -32,7 +32,7 @@ public class Main {
 
         MongoClient mongo = new MongoClient( "localhost" , 27017 );
         MongoDatabase mongoDatabase = mongo.getDatabase("twitt_db_test");
-        final MongoCollection table = mongoDatabase.getCollection("twitt_col_jul_3");
+        final MongoCollection table = mongoDatabase.getCollection("twitt_col_jul_4");
 
 
         Twitter twitter = TwitterFactory.getSingleton();

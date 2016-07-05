@@ -7,6 +7,9 @@
     <groupId>bd.com.nati</groupId>
     <artifactId>Test1</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <neo4j.version>3.0.4-SNAPSHOT</neo4j.version>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -40,6 +43,17 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j.driver</groupId>
+            <artifactId>neo4j-java-driver</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j</artifactId>
+            <version>${neo4j.version}</version>
+
         </dependency>
 
         <!--<dependency>-->
