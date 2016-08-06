@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c80f949a-424b-474c-8fc9-1e453c730bf2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_json_simple_json_simple_1_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/FollowerFromFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Main$1.class" afterPath="$PROJECT_DIR$/target/classes/Main$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Main.class" afterPath="$PROJECT_DIR$/target/classes/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/MongoTest.class" afterPath="$PROJECT_DIR$/target/classes/MongoTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TwitterTest.iml" afterPath="$PROJECT_DIR$/TwitterTest.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/FollowerEntity.java" afterPath="$PROJECT_DIR$/src/main/java/FollowerEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/SplitUsers.java" afterPath="$PROJECT_DIR$/src/main/java/SplitUsers.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/UserEntity.java" afterPath="$PROJECT_DIR$/src/main/java/UserEntity.java" />
-    </list>
+    <list default="true" id="c80f949a-424b-474c-8fc9-1e453c730bf2" name="Default" comment="" />
     <ignored path="TwitterTest.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -812,7 +799,7 @@
       <workItem from="1469902679658" duration="9308000" />
       <workItem from="1470418859716" duration="644000" />
       <workItem from="1470419539527" duration="970000" />
-      <workItem from="1470420919987" duration="11584000" />
+      <workItem from="1470420919987" duration="11601000" />
     </task>
     <task id="LOCAL-00001" summary="mongo to neo4j retweet relation">
       <created>1467728545102</created>
@@ -828,15 +815,22 @@
       <option name="project" value="LOCAL" />
       <updated>1470483095945</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="jhj">
+      <created>1470490815610</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1470490815610</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113229000" />
+    <option name="totallyTimeSpent" value="113246000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -905,7 +899,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="mongo to neo4j retweet relation" />
-    <option name="LAST_COMMIT_MESSAGE" value="mongo to neo4j retweet relation" />
+    <MESSAGE value="jhj" />
+    <option name="LAST_COMMIT_MESSAGE" value="jhj" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
