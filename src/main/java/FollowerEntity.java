@@ -1,4 +1,5 @@
 import org.bson.Document;
+import org.json.simple.JSONObject;
 
 import java.io.Serializable;
 
@@ -63,6 +64,16 @@ public class FollowerEntity implements Serializable {
         document.put("firstUser",this.firstUser.document());
         document.put("secondUser",this.secondUser.document());
         return document;
+    }
+    public JSONObject getJsonObject()
+    {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("isMutual",this.isMutual);
+        jsonObject.put("isFollowing",this.isFollowing);
+        jsonObject.put("isReverseFollowing",this.isReverseFollowing);
+        jsonObject.put("firstUser",this.firstUser.jsonObject());
+        jsonObject.put("secondUser",this.secondUser.jsonObject());
+        return jsonObject;
     }
 
 

@@ -1,12 +1,16 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -18,7 +22,7 @@ public class SplitUsers {
     private static int count = 1;
     private static ArrayList<Document> userList = new ArrayList<Document>();
     public static void main(String[] args) {
-        split(50);
+        split(20);
 //        JsonArray array = readFromFile("");
 //        System.out.println(array.size());
     }
@@ -57,7 +61,7 @@ public class SplitUsers {
         saveToFile(json,fileName);
 
     }
-    private static void saveToFile(String content,String fileName)
+    public static void saveToFile(String content,String fileName)
     {
         System.out.println(fileName);
         PrintWriter writer = null;
@@ -74,24 +78,29 @@ public class SplitUsers {
 //        System.out.println(content);
 
     }
-    private  static JsonArray readFromFile(String fileName)
+    public static JSONArray readFromFile(String fileName)
     {
         String sCurrentLine;
         BufferedReader br = null;
 
         try {
             String totalResult = "";
-            br = new BufferedReader(new FileReader("split_user/full/users_1_1002.json"));
+            br = new BufferedReader(new FileReader(fileName));
             while ((sCurrentLine = br.readLine()) != null) {
                 totalResult+=sCurrentLine;
             }
             Gson gson = new GsonBuilder().create();
-            JsonArray array = gson.fromJson(totalResult,JsonArray.class);
-            return array;
+            JSONParser parser = new JSONParser();
+
+            JSONArray jsonArray = (JSONArray) parser.parse(totalResult);
+
+            return jsonArray;
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         return null;

@@ -1,4 +1,5 @@
 import org.bson.Document;
+import org.json.simple.JSONObject;
 
 import java.io.Serializable;
 
@@ -31,6 +32,13 @@ public class UserEntity implements Serializable {
         document.put("screenName",this.screenName);
         document.put("user_id",this.id);
         return document;
+    }
+    public JSONObject jsonObject()
+    {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("screenName",this.screenName);
+        jsonObject.put("user_id",this.id);
+        return jsonObject;
     }
 
     @Override
