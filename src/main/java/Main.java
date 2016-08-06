@@ -31,8 +31,8 @@ public class Main {
         String consumerSecret = "YxOc7TzXgZIZvMssLGI5HUFTYDU5mfNevE4V8Ckk9LNsJQ5FF8";
 
         MongoClient mongo = new MongoClient( "localhost" , 27017 );
-        MongoDatabase mongoDatabase = mongo.getDatabase("twitt_db_test");
-        final MongoCollection table = mongoDatabase.getCollection("twitt_col_jul_4");
+        MongoDatabase mongoDatabase = mongo.getDatabase("twitt_db");
+        final MongoCollection table = mongoDatabase.getCollection("twitt_col_jul_8");
 
 
         Twitter twitter = TwitterFactory.getSingleton();
