@@ -1,0 +1,69 @@
+$HADOOP_HOME/bin/hadoop jar $GIRAPH_HOME/giraph-examples/target/giraph-examples-1.2.0-SNAPSHOT-for-hadoop-1.2.1-jar-with-dependencies.jar org.apache.giraph.GiraphRunner org.apache.giraph.examples.SimpleShortestPathsComputation -vif org.apache.giraph.io.formats.JsonLongDoubleFloatDoubleVertexInputFormat -vip /user/nati/input/tiny_graph.txt -vof org.apache.giraph.io.formats.IdWithValueTextOutputFormat -op /user/nati/output/shortestpaths -w 1
+
+$HADOOP_HOME/bin/hadoop jar /home/nati/IdeaProjects/giraph/target/giraph-1.0-SNAPSHOT.jar  GiraphHelloWorld -vif org.apache.giraph.io.formats.IntIntNullTextInputFormat -vip /user/nati/input/graph.txt -op /user/nati/output/baal -w 1
+
+$HADOOP_HOME/bin/hadoop dfs -copyFromLocal /app/hadoop/tmp/tiny_graph.txt /user/nati/input/tiny_graph.txt
+
+
+./giraph /home/nati/IdeaProjects/giraph/target/giraph-1.0-SNAPSHOT-jar-with-dependencies.jar nati.Main -vip /app/hadoop/tmp/graph.txt -vif org.apache.giraph.io.formats.IntIntNullTextInputFormat  -w 1  -ca giraph.SplitMasterWorker=false,giraph.logLevel=error
+
+mvn clean compile assembly:single
+
+{
+    "ClusterId": "j-YQCKSRPZUSWF"
+}
+
+
+ aws emr ssh \
+ --cluster-id j-YQCKSRPZUSWF \
+ --key-pair-file ~/giraph-keys.pem
+
+ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=10 -i /home/nati/giraph-keys.pem hadoop@ec2-54-205-188-198.compute-1.amazonaws.com -t
+
+
+s3://aws-logs-404114663571-us-west-2/elasticmapreduce/
+
+ aws emr put --cluster-id j-YQCKSRPZUSWF --key-pair-file ~/giraph-keys.pem --src /home/nati/IdeaProjects/giraph/target/giraph-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+aws emr add-steps --cluster-id j-YQCKSRPZUSWF\
+ --steps '[{
+"Type":"CUSTOM_JAR",
+"Name":"GiraphApp",
+"MainClass":"nati.Main",
+"ActionOnFailure":"CONTINUE",
+"Jar":"file:///home/hadoop/giraph-1.0-SNAPSHOT-jar-with-dependencies.jar",
+"Args":["nati.Main",
+ "-vip", "hdfs:///user/hadoop/input/graph.txt",
+ "-op","hdfs:///user/hadoop/output/nati.txt",
+ "-vif", "org.apache.giraph.io.formats.IntIntNullTextInputFormat",
+ "-vof", "org.apache.giraph.io.formats.GraphvizOutputFormat",
+ "-w", "1",
+"-ca","giraph.SplitMasterWorker=false,giraph.logLevel=error"]}]'
+
+
+org.apache.giraph.io.formats.GraphvizOutputFormat
+TextVertexOutputFormat
+
+aws emr add-steps --cluster-id j-YQCKSRPZUSWF\
+ --steps '[{"Type" : "CUSTOM_JAR",
+ "Name" : "DownloadOutputData",
+ "ActionOnFailure" : "CANCEL_AND_WAIT",
+ "Jar" : "/home/hadoop/lib/emr-s3distcp-1.0.jar",
+ "Args" : [ "--src", "hdfs:///user/hadoop/output",
+ "--dest","s3://nati-papon-420/output/"]}]'
+
+
+{
+    "StepIds": [
+        "s-2NK1SN51VIF5E"
+    ]
+}
+
+ aws emr describe-step --cluster-id j-YQCKSRPZUSWF --step-id s-2H4BBVUA4RRU6
+ /mnt/var/log/hadoop/steps/s-3VH13B0QO07A9/stderr
+
+aws emr add-steps --cluster-id j-YQCKSRPZUSWF --steps Type=CUSTOM_JAR,Name=UploadInputData,Jar=/home/hadoop/lib/emr-s3distcp-1.0.jar,Args=--src,s3://nati-papon-420/input/,--dest,hdfs:///user/hadoop/input
+
+
+
+
