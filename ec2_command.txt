@@ -4,6 +4,8 @@ $HADOOP_HOME/bin/hadoop jar /home/nati/IdeaProjects/giraph/target/giraph-1.0-SNA
 
 $HADOOP_HOME/bin/hadoop dfs -copyFromLocal /app/hadoop/tmp/tiny_graph.txt /user/nati/input/tiny_graph.txt
 
+sudo ./hadoop jar /usr/local/giraph/giraph-examples/target/giraph-examples-1.2.0-SNAPSHOT-for-hadoop-1.2.1-jar-with-dependencies.jar \ org.apache.giraph.GiraphRunner org.apache.giraph.examples.kcore.KCore \ -mc org.apache.giraph.examples.kcore.KCoreMasterCompute \ -wc org.apache.giraph.examples.kcore.KCoreWorkerContext \ -vif org.apache.giraph.examples.kcore.KCoreInputFormat \ -vip /user/nati/input/in2.txt \ -vof org.apache.giraph.examples.kcore.KCoreOutputFormat \ -op /user/hduser/output/kcore \ -w 1 \ /
+
 
 ./giraph /home/nati/IdeaProjects/giraph/target/giraph-1.0-SNAPSHOT-jar-with-dependencies.jar nati.Main -vip /app/hadoop/tmp/graph.txt -vif org.apache.giraph.io.formats.IntIntNullTextInputFormat  -w 1  -ca giraph.SplitMasterWorker=false,giraph.logLevel=error
 

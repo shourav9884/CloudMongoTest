@@ -22,9 +22,11 @@ public class SplitUsers {
     private static int count = 1;
     private static ArrayList<Document> userList = new ArrayList<Document>();
     public static void main(String[] args) {
-        split(20);
+//        split(20);
 //        JsonArray array = readFromFile("");
 //        System.out.println(array.size());
+        fromFileToMongo();
+
     }
 
     public static void split(final int size)
@@ -107,5 +109,40 @@ public class SplitUsers {
 
 
     }
+
+    public static void fromFileToMongo()
+    {
+        String fileName = "final-out.txt";
+
+        MongoClient mongo = new MongoClient( );
+        MongoDatabase mongoDatabase = mongo.getDatabase("twitt_db");
+        MongoCollection newTable = mongoDatabase.getCollection("twitt_col_dhaka_bd_with_k");
+        String sCurrentLine;
+        BufferedReader br = null;
+
+        String totalResult = "";
+        try {
+            br = new BufferedReader(new FileReader(fileName));
+            while ((sCurrentLine = br.readLine()) != null) {
+                JSONParser parser = new JSONParser();
+                JSONArray array = (JSONArray) parser.parse(sCurrentLine);
+
+                Document document = new Document();
+                document.put("userID",array.get(0));
+                document.put("kValue",array.get(1));
+                newTable.insertOne(document);
+            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }

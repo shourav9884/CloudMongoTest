@@ -119,84 +119,85 @@ public class Neo4jTest {
 
 
         }
+        System.out.println(relationShips);
 //        session.close();
 //        driver.close();
         System.out.println(userHashMap.size());
 
-        for (Long id:userHashMap.keySet())
-        {
-            List<Long> followersList = new ArrayList<Long>();
-
-
-            String consumerKey="yGoqCT9g0iMlzSt8IXxMsZfkV";
-            String consumerSecret = "YxOc7TzXgZIZvMssLGI5HUFTYDU5mfNevE4V8Ckk9LNsJQ5FF8";
-
-            Twitter twitter = TwitterFactory.getSingleton();
-            twitter.setOAuthConsumer(consumerKey, consumerSecret);
-
-            RequestToken requestToken = null;
-            try {
-                requestToken = twitter.getOAuthRequestToken();
-            } catch (TwitterException e) {
-                e.printStackTrace();
-            }
-            AccessToken accessToken = null;
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            while (null == accessToken) {
-                System.out.println("Open the following URL and grant access to your account:");
-                System.out.println(requestToken.getAuthorizationURL());
-                System.out.print("Enter the PIN(if aviailable) or just hit enter.[PIN]:");
-
-                try{
-                    String pin = br.readLine();
-                    if(pin.length() > 0){
-                        accessToken = twitter.getOAuthAccessToken(requestToken, pin);
-                    }else{
-                        accessToken = twitter.getOAuthAccessToken();
-                    }
-                } catch (TwitterException te) {
-                    if(401 == te.getStatusCode()){
-                        System.out.println("Unable to get the access token.");
-                    }else{
-                        te.printStackTrace();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(accessToken!=null) {
-
-                long lCursor = -1;
-                int count = 5000;
-
-
-                IDs friendsIDs = null;
-                try {
-                    friendsIDs = twitter.getFollowersIDs(id, lCursor,count);
-                    System.out.println(twitter.showUser(id).getName());
-                    System.out.println("==========================");
-                    do
-                    {
-                        System.out.println(friendsIDs.getIDs().length);
-                        for (long i : friendsIDs.getIDs())
-                        {
-                            System.out.println("follower ID #" + i);
-                            if(userHashMap.containsKey(i) && i!=id)
-                            {
-                                followersList.add(i);
-                            }
-                            System.out.println(twitter.showUser(i).getName());
-                        }
-                    }while(friendsIDs.hasNext());
-
-                } catch (TwitterException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            test.insertIntoMongo(id,followersList);
-        }
+//        for (Long id:userHashMap.keySet())
+//        {
+//            List<Long> followersList = new ArrayList<Long>();
+//
+//
+//            String consumerKey="yGoqCT9g0iMlzSt8IXxMsZfkV";
+//            String consumerSecret = "YxOc7TzXgZIZvMssLGI5HUFTYDU5mfNevE4V8Ckk9LNsJQ5FF8";
+//
+//            Twitter twitter = TwitterFactory.getSingleton();
+//            twitter.setOAuthConsumer(consumerKey, consumerSecret);
+//
+//            RequestToken requestToken = null;
+//            try {
+//                requestToken = twitter.getOAuthRequestToken();
+//            } catch (TwitterException e) {
+//                e.printStackTrace();
+//            }
+//            AccessToken accessToken = null;
+//            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//            while (null == accessToken) {
+//                System.out.println("Open the following URL and grant access to your account:");
+//                System.out.println(requestToken.getAuthorizationURL());
+//                System.out.print("Enter the PIN(if aviailable) or just hit enter.[PIN]:");
+//
+//                try{
+//                    String pin = br.readLine();
+//                    if(pin.length() > 0){
+//                        accessToken = twitter.getOAuthAccessToken(requestToken, pin);
+//                    }else{
+//                        accessToken = twitter.getOAuthAccessToken();
+//                    }
+//                } catch (TwitterException te) {
+//                    if(401 == te.getStatusCode()){
+//                        System.out.println("Unable to get the access token.");
+//                    }else{
+//                        te.printStackTrace();
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            if(accessToken!=null) {
+//
+//                long lCursor = -1;
+//                int count = 5000;
+//
+//
+//                IDs friendsIDs = null;
+//                try {
+//                    friendsIDs = twitter.getFollowersIDs(id, lCursor,count);
+//                    System.out.println(twitter.showUser(id).getName());
+//                    System.out.println("==========================");
+//                    do
+//                    {
+//                        System.out.println(friendsIDs.getIDs().length);
+//                        for (long i : friendsIDs.getIDs())
+//                        {
+//                            System.out.println("follower ID #" + i);
+//                            if(userHashMap.containsKey(i) && i!=id)
+//                            {
+//                                followersList.add(i);
+//                            }
+//                            System.out.println(twitter.showUser(i).getName());
+//                        }
+//                    }while(friendsIDs.hasNext());
+//
+//                } catch (TwitterException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//
+//            test.insertIntoMongo(id,followersList);
+//        }
 
         System.out.println(followerMap);
 
@@ -206,7 +207,6 @@ public class Neo4jTest {
         ArrayList<Status> statuses = new ArrayList<Status>();
         MongoClient mongo = new MongoClient( );
         MongoDatabase mongoDatabase = mongo.getDatabase("twitt_db");
-        MongoCollection<Document> table = mongoDatabase.getCollection("twitt_col_jul_2");
         MongoCollection newTable = mongoDatabase.getCollection("twitt_col_dhaka_bd");
 
         FindIterable<Document> iterable = newTable.find(new Document());

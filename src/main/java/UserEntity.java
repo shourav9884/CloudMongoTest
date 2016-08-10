@@ -1,3 +1,4 @@
+import com.google.gson.annotations.SerializedName;
 import org.bson.Document;
 import org.json.simple.JSONObject;
 
@@ -8,6 +9,7 @@ import java.io.Serializable;
  */
 public class UserEntity implements Serializable {
     String screenName;
+    @SerializedName("user_id")
     Long id;
 
     public String getScreenName() {

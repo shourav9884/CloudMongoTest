@@ -24,6 +24,7 @@ public class HtmlParse {
 
         url = url+firstUser.getScreenName()+"/"+secondUser.getScreenName();
         System.out.println(url);
+        boolean flag = true;
 
         while(true) {
 
@@ -40,6 +41,7 @@ public class HtmlParse {
                         userB = users.get(1).ownText().replace("@", "");
                         users.get(0).remove();
                         users.get(1).remove();
+                        flag = false;
                     }
 
                     Elements el = e.select("#url");
@@ -61,7 +63,8 @@ public class HtmlParse {
                         }
                     }
                 }
-                break;
+                if(!flag)
+                    break;
 
 //            System.out.println(newsHeadlines.html());
             } catch (IOException e) {
